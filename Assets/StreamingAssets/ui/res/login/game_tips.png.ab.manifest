@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2649841708
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bf88e0c9437a269be7ac9a7d5042672f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7859cd501ea75098bcf7e53f1b477c26
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/BuildResources/UI/Res/Login/game_tips.png
+Dependencies: []
