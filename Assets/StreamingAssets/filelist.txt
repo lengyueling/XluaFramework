@@ -1,0 +1,5 @@
+Assets/BuildResources/UI/Res/Login/bg01.png|
+Assets/BuildResources/UI/Res/Login/game_tips.png|
+Assets/BuildResources/UI/Res/Login/game_title.png|
+Assets/BuildResources/UI/Res/Login/loading.jpg|
+Assets/BuildResources/UI/Res/Login/loading_bar.png|
