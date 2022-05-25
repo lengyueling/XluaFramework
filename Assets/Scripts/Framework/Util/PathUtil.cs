@@ -20,6 +20,14 @@ public class PathUtil
     public static readonly string AssetsPath = Application.dataPath;
 
     /// <summary>
+    /// Bundle资源路径
+    /// </summary>
+    public static string BundleResourcePath
+    {
+        get { return Application.streamingAssetsPath; }
+    }
+
+    /// <summary>
     /// 获取Unity相对路径
     /// </summary>
     /// <param name="path"></param>

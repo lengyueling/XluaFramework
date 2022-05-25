@@ -59,7 +59,7 @@ public class BuildTool : Editor
 
             //添加文件依赖信息
             List<string> dependenceInfo = GetDependence(assetName);
-            string bundleInfo = assetName + "|" + string.Join("|", dependenceInfo);
+            string bundleInfo = assetName + "|" + bundleName + ".ab";
             if (dependenceInfo.Count > 0)
             {
                 bundleInfo = bundleInfo + "|" + string.Join("|", dependenceInfo);
@@ -75,7 +75,7 @@ public class BuildTool : Editor
         Directory.CreateDirectory(PathUtil.BundleOutPath);
         //打包Bundle 目录，压缩方式，目标平台
         BuildPipeline.BuildAssetBundles(PathUtil.BundleOutPath,assetBundleBuilds.ToArray(), BuildAssetBundleOptions.None, target);
-        //写出文件信息，依赖关系
+        //写入文件信息，依赖关系
         File.WriteAllLines(PathUtil.BundleOutPath + "/" + AppConst.FileListName, bundleInfos);
 
         AssetDatabase.Refresh();

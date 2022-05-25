@@ -1,19 +1,25 @@
 ManifestFileVersion: 0
-CRC: 4011881958
+CRC: 1910089611
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
+      Name: ui/prefabs/testui.prefab.ab
+      Dependencies:
+        Dependency_0: ui/res/login/bg01.png.ab
+        Dependency_1: ui/res/login/game_title.png.ab
+        Dependency_2: ui/res/login/loading.jpg.ab
+    Info_1:
       Name: ui/res/login/bg01.png.ab
       Dependencies: {}
-    Info_1:
+    Info_2:
       Name: ui/res/login/game_tips.png.ab
       Dependencies: {}
-    Info_2:
+    Info_3:
       Name: ui/res/login/game_title.png.ab
       Dependencies: {}
-    Info_3:
+    Info_4:
       Name: ui/res/login/loading.jpg.ab
       Dependencies: {}
-    Info_4:
+    Info_5:
       Name: ui/res/login/loading_bar.png.ab
       Dependencies: {}

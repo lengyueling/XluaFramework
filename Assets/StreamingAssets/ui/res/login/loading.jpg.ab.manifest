@@ -1,15 +1,17 @@
 ManifestFileVersion: 0
-CRC: 571916254
+CRC: 2863270803
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d49338a247df03b5192aa3f6a858610b
+    Hash: 0cd7ab0345e44c8f70f90fc9976bd694
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 7859cd501ea75098bcf7e53f1b477c26
+    Hash: c90fc19e2679e5295d10bd00f33cb4c3
 HashAppended: 0
 ClassTypes:
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 213
   Script: {instanceID: 0}
 Assets:
 - Assets/BuildResources/UI/Res/Login/loading.jpg
