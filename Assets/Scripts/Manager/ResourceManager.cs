@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using Object = UnityEngine.Object;
+using UnityEditor;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ResourceManager : MonoBehaviour
     /// <summary>
     /// 解析版本文件
     /// </summary>
-    private void ParseVersonFile()
+    public void ParseVersonFile()
     {
         //获取版本文件路径
         string url = Path.Combine(PathUtil.BundleResourcePath, AppConst.FileListName);
@@ -71,27 +72,62 @@ public class ResourceManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 编辑器环境加载资源
+    /// </summary>
+    /// <param name="assetName"></param>
+    /// <param name="action"></param>
+    void EditorLoadAsset(string assetName,Action<Object> action = null)
+    {
+        Object obj = AssetDatabase.LoadAssetAtPath(assetName, typeof(Object));
+        if (obj == null)
+        {
+            Debug.LogError("assets name is not exist" + assetName);
+        }
+        action?.Invoke(obj);
+    }
+
+    /// <summary>
     /// 加载资源
     /// </summary>
     /// <param name="assetName"></param>
     /// <param name="action"></param>
-    public void LoadAsset(string assetName, Action<Object> action)
+    private void LoadAsset(string assetName, Action<Object> action)
     {
-        StartCoroutine(LoadBundleAsync(assetName, action));
+
+        if (AppConst.GameMode == GameMode.EditorMode)
+        {
+            EditorLoadAsset(assetName, action);
+        }
+        else
+        {
+            StartCoroutine(LoadBundleAsync(assetName, action));
+        }
     }
 
-    private void Start()
+    public void LoadUI(string assetName, Action<Object> action = null)
     {
-        ParseVersonFile();
-        //测试
-        LoadAsset("Assets/BuildResources/UI/Prefabs/TestUI.prefab", OnComplete);
+        LoadAsset(PathUtil.GetUIPath(assetName),action);
     }
 
-    private void OnComplete(Object obj)
+    public void LoadMusic(string assetName, Action<Object> action = null)
     {
-        GameObject go = Instantiate(obj) as GameObject;
-        go.transform.SetParent(this.transform);
-        go.SetActive(true);
-        go.transform.localPosition = Vector3.zero;
+        LoadAsset(PathUtil.GetMusicPath(assetName), action);
     }
+
+    public void LoadSound(string assetName, Action<Object> action = null)
+    {
+        LoadAsset(PathUtil.GetSoundPath(assetName), action);
+    }
+
+    public void LoadEffect(string assetName, Action<Object> action = null)
+    {
+        LoadAsset(PathUtil.GetEffectPath(assetName), action);
+    }
+
+    public void LoadScene(string assetName, Action<Object> action = null)
+    {
+        LoadAsset(PathUtil.GetScenePath(assetName), action);
+    }
+
+    //TODO: 卸载
 }
