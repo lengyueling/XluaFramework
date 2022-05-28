@@ -10,7 +10,7 @@ public class FileUtil
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static bool isExists(string path)
+    public static bool IsExists(string path)
     {
         FileInfo file = new FileInfo(path);
         return file.Exists;
@@ -44,9 +44,9 @@ public class FileUtil
                 fs.Close();
             }
         }
-        catch (System.Exception e)
+        catch(IOException e)
         {
-            Debug.Log(e.Message);
+            Debug.LogError(e.Message);
         }
     }
 }

@@ -12,7 +12,7 @@ public class PathUtil
     /// <summary>
     /// 需要打Bundle的目录
     /// </summary>
-    public static readonly string BuildResourcesPath = Application.dataPath + "/BuildResources/";
+    public static readonly string BuildResourcesPath = AssetsPath + "/BuildResources/";;
 
     /// <summary>
     /// Bundle输出目录
@@ -36,7 +36,7 @@ public class PathUtil
     {
         get
         {
-            if (AppConst.GameMode == GameMode.PackageBundle)
+            if (AppConst.GameMode == GameMode.UpdateMode)
             {
                 //可读写的目录
                 return ReadWritePath;

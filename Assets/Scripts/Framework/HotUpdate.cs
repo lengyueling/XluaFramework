@@ -33,7 +33,7 @@ public class HotUpdate : MonoBehaviour
         yield return webRequest.SendWebRequest();
         if (webRequest.isHttpError || webRequest.isNetworkError)
         {
-            Debug.Log("下载文件出错" + info.url);
+            Debug.LogError("下载文件出错：" + info.url);
             yield break;
             //TODO retry
         }
@@ -66,13 +66,13 @@ public class HotUpdate : MonoBehaviour
     private List<DownFileInfo> GetFileList(string fileData,string path)
     {
         string content = fileData.Trim().Replace("\r", "");
-        string[] files = content.Split('|');
+        string[] files = content.Split('\n');
         List<DownFileInfo> downFileInfos = new List<DownFileInfo>(files.Length);
         for (int i = 0; i < files.Length; i++)
         {
             string[] info = files[i].Split('|');
             DownFileInfo fileInfo = new DownFileInfo();
-            fileInfo.fileName = info[i];
+            fileInfo.fileName = info[1];
             fileInfo.url = Path.Combine(path, info[1]);
             downFileInfos.Add(fileInfo);
         }
@@ -98,9 +98,9 @@ public class HotUpdate : MonoBehaviour
     private bool IsFirstInstall()
     {
         //判断只读目录是否存在版本文件
-        bool isExistReadPath = FileUtil.isExists(Path.Combine(PathUtil.ReadPath, AppConst.FileListName));
+        bool isExistReadPath = FileUtil.IsExists(Path.Combine(PathUtil.ReadPath, AppConst.FileListName));
         //判断可读写目录是否存在版本文件
-        bool isExistsReadWritePath = FileUtil.isExists(Path.Combine(PathUtil.ReadWritePath, AppConst.FileListName));
+        bool isExistsReadWritePath = FileUtil.IsExists(Path.Combine(PathUtil.ReadWritePath, AppConst.FileListName));
         return isExistReadPath && !isExistsReadWritePath;
     }
 
@@ -173,8 +173,8 @@ public class HotUpdate : MonoBehaviour
         List<DownFileInfo> downListFiles = new List<DownFileInfo>();
         for (int i = 0; i < fileInfos.Count; i++)
         {
-            string loalFile = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
-            if (!FileUtil.isExists(loalFile))
+            string localFile = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
+            if (!FileUtil.IsExists(localFile))
             {
                 fileInfos[i].url = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
                 downListFiles.Add(fileInfos[i]);
@@ -208,7 +208,7 @@ public class HotUpdate : MonoBehaviour
     /// <param name="file"></param>
     private void OnUpdateFileComplete(DownFileInfo file)
     {
-        Debug.Log("OnReleaseFileComplete:" + file.url);
+        Debug.Log("OnUpdateFileComplete:" + file.url);
         string writeFile = Path.Combine(PathUtil.ReadWritePath, file.fileName);
         FileUtil.WriteFile(writeFile, file.fileData.data);
     }
