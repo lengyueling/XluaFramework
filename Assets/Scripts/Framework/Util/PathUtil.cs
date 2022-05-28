@@ -12,7 +12,7 @@ public class PathUtil
     /// <summary>
     /// 需要打Bundle的目录
     /// </summary>
-    public static readonly string BuildResourcesPath = AssetsPath + "/BuildResources/";;
+    public static readonly string BuildResourcesPath = AssetsPath + "/BuildResources/";
 
     /// <summary>
     /// Bundle输出目录
