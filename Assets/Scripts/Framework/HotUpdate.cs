@@ -51,7 +51,7 @@ public class HotUpdate : MonoBehaviour
     /// <returns></returns>
     IEnumerator DownLoadFile(List<DownFileInfo> infos, Action<DownFileInfo> Complete,Action DownLoadAllComplete)
     {
-        foreach (var info in infos)
+        foreach (DownFileInfo info in infos)
         {
             yield return DownLoadFile(info, Complete);
         }
@@ -81,13 +81,20 @@ public class HotUpdate : MonoBehaviour
 
     private void Start()
     {
-        if (IsFirstInstall())
+        if (AppConst.GameMode == GameMode.EditorMode)
         {
-            ReleaseResources();
+            EnterGame();
         }
         else
         {
-            CheckUpdate();
+            if (IsFirstInstall())
+            {
+                ReleaseResources();
+            }
+            else
+            {
+                CheckUpdate();
+            }
         }
     }
 
@@ -98,10 +105,12 @@ public class HotUpdate : MonoBehaviour
     private bool IsFirstInstall()
     {
         //判断只读目录是否存在版本文件
-        bool isExistReadPath = FileUtil.IsExists(Path.Combine(PathUtil.ReadPath, AppConst.FileListName));
+        bool isExistsReadPath = FileUtil.IsExists(Path.Combine(PathUtil.ReadPath, AppConst.FileListName));
+
         //判断可读写目录是否存在版本文件
         bool isExistsReadWritePath = FileUtil.IsExists(Path.Combine(PathUtil.ReadWritePath, AppConst.FileListName));
-        return isExistReadPath && !isExistsReadWritePath;
+
+        return isExistsReadPath && !isExistsReadWritePath;
     }
 
     /// <summary>
@@ -155,7 +164,7 @@ public class HotUpdate : MonoBehaviour
     /// </summary>
     private void CheckUpdate()
     {
-        string url = Path.Combine(AppConst.ResourceUrl, AppConst.FileListName);
+        string url = Path.Combine(AppConst.ResourcesUrl, AppConst.FileListName);
         DownFileInfo info = new DownFileInfo();
         info.url = url;
         StartCoroutine(DownLoadFile(info, OnDownLoadServerFileListComplete));
@@ -169,14 +178,16 @@ public class HotUpdate : MonoBehaviour
     private void OnDownLoadServerFileListComplete(DownFileInfo file)
     {
         m_ServerFileListData = file.fileData.data;
-        List<DownFileInfo> fileInfos = GetFileList(file.fileData.text, AppConst.ResourceUrl);
+        List<DownFileInfo> fileInfos = GetFileList(file.fileData.text, AppConst.ResourcesUrl);
         List<DownFileInfo> downListFiles = new List<DownFileInfo>();
         for (int i = 0; i < fileInfos.Count; i++)
         {
             string localFile = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
+
+            //通过文件的md5来进行校验
             if (!FileUtil.IsExists(localFile))
             {
-                fileInfos[i].url = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
+                fileInfos[i].url = Path.Combine(AppConst.ResourcesUrl, fileInfos[i].fileName);
                 downListFiles.Add(fileInfos[i]);
             }
         }

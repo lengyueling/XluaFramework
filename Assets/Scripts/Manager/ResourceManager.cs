@@ -46,6 +46,12 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 异步加载资源
+    /// </summary>
+    /// <param name="assetName"></param>
+    /// <param name="action"></param>
+    /// <returns></returns>
     IEnumerator LoadBundleAsync(string assetName,Action<Object> action = null)
     {
         string bundleName = m_BundleInfos[assetName].BundleName;

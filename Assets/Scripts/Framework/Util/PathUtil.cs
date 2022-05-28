@@ -36,6 +36,7 @@ public class PathUtil
     {
         get
         {
+            //更新模式（分包模式）下，ReadPath是空的
             if (AppConst.GameMode == GameMode.UpdateMode)
             {
                 //可读写的目录

@@ -22,5 +22,5 @@ public class AppConst
     /// <summary>
     /// 资源服务器目录
     /// </summary>
-    public const string ResourceUrl = "http://127.0.0.1:4579/AssetBundles/";
+    public const string ResourcesUrl = "http://127.0.0.1:6160/AssetBundles/";
 }
