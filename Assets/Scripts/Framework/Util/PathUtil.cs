@@ -36,6 +36,11 @@ public class PathUtil
     public static readonly string ReadWritePath = Application.persistentDataPath;
 
     /// <summary>
+    /// Lua路径
+    /// </summary>
+    public static readonly string LuaPath = "Assets/BuildResources/LuaScripts";
+
+    /// <summary>
     /// Bundle资源路径
     /// 更新模式下返回可读写的目录sersistentDataPath
     /// 其他模式返回只读目录streamingAssetsPath
@@ -84,11 +89,21 @@ public class PathUtil
         return path.Trim().Replace("\\", "/");
     }
 
+    /// <summary>
+    /// 获取Asset中Lua文件路径
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public static string GetLuaPath(string name)
     {
         return string.Format("Assets/BuildResources/LuaScripts/{0}.bytes", name);
     }
 
+    /// <summary>
+    /// 获取Asset中UI文件路径
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public static string GetUIPath(string name)
     {
         return string.Format("Assets/BuildResources/UI/Prefabs/{0}.prefab", name);

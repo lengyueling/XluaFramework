@@ -15,6 +15,9 @@ public class ResourceManager : MonoBehaviour
     {
         public string AssetsName;
         public string BundleName;
+        /// <summary>
+        /// 依赖文件的列表
+        /// </summary>
         public List<string> Dependences;
     }
     /// <summary>
@@ -46,6 +49,13 @@ public class ResourceManager : MonoBehaviour
                 bundleInfo.Dependences.Add(info[j]);
             }
             m_BundleInfos.Add(bundleInfo.AssetsName, bundleInfo);
+
+            //如果是解析的是lua文件（LuaScripts字符串第一次完整出现时的索引）
+            if (info[0].IndexOf("LuaScripts") > 0)
+            {
+                //加入列表 info[0]已经包含了完整的Assets路径
+                Manager.Lua.LuaNames.Add(info[0]);
+            }
         }
     }
 
@@ -84,7 +94,7 @@ public class ResourceManager : MonoBehaviour
             action.Invoke(bundleRequest.asset);
         }
     }
-
+#if UNITY_EDITOR
     /// <summary>
     /// 编辑器环境加载资源
     /// LoadAsset的内部函数
@@ -101,6 +111,7 @@ public class ResourceManager : MonoBehaviour
         //执行回调函数，前提是action不为null
         action?.Invoke(obj);
     }
+#endif
 
     /// <summary>
     /// 加载资源
@@ -110,16 +121,18 @@ public class ResourceManager : MonoBehaviour
     /// <param name="action"></param>
     private void LoadAsset(string assetName, Action<Object> action)
     {
-
+#if UNITY_EDITOR
         if (AppConst.GameMode == GameMode.EditorMode)
         {
             EditorLoadAsset(assetName, action);
         }
         else
+#endif
         {
             StartCoroutine(LoadBundleAsync(assetName, action));
         }
     }
+
 
     public void LoadUI(string assetName, Action<Object> action = null)
     {
@@ -144,6 +157,11 @@ public class ResourceManager : MonoBehaviour
     public void LoadScene(string assetName, Action<Object> action = null)
     {
         LoadAsset(PathUtil.GetScenePath(assetName), action);
+    }
+
+    public void LoadLua(string assetName, Action<Object> action = null)
+    {
+        LoadAsset(assetName, action);
     }
 
     //TODO: 卸载

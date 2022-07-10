@@ -13,7 +13,7 @@ public class BuildTool : Editor
     [MenuItem("Tools/Build Windows Bundle")]
     static void BundleWindowsBuild()
     {
-        Build(BuildTarget.StandaloneWindows64);
+        Build(BuildTarget.StandaloneWindows);
     }
 
     [MenuItem("Tools/Build Android Bundle")]
