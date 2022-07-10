@@ -1,4 +1,6 @@
+Manager = CS.Manager;
 function Main()
 	print("hello");
+	Manager.UI:OpenUI("TestUI","ui.TestUI")
 end
 -- Main()
