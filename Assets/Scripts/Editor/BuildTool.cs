@@ -5,6 +5,9 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
+/// <summary>
+/// 打包工具类
+/// </summary>
 public class BuildTool : Editor
 {
     [MenuItem("Tools/Build Windows Bundle")]
@@ -25,6 +28,10 @@ public class BuildTool : Editor
         Build(BuildTarget.iOS);
     }
 
+    /// <summary>
+    /// 打包
+    /// </summary>
+    /// <param name="target">打包平台</param>
     static void Build(BuildTarget target)
     {
         //实例化AssetBundleBuild管理列表
@@ -33,7 +40,7 @@ public class BuildTool : Editor
         //文件信息列表
         List<string> bundleInfos = new List<string>();
 
-        //获取所有文件
+        //获取所有文件，递归查找所有子目录
         string[] files = Directory.GetFiles(PathUtil.BuildResourcesPath, "*", SearchOption.AllDirectories);
         
         for (int i = 0; i < files.Length; i++)
@@ -48,16 +55,16 @@ public class BuildTool : Editor
 
             string fileName = PathUtil.GetStandardPath(files[i]);
             Debug.Log("file:" + fileName);
-
+            //要打包的资源名
             string assetName = PathUtil.GetUnityPath(fileName);
-            //获取要打包的资源名字
+            //获取要打包的资源名字给打包对象
             assetBundle.assetNames = new string[] { assetName };
             string bundleName = fileName.Replace(PathUtil.BuildResourcesPath, "").ToLower();
             //设置打包后资源的名字
             assetBundle.assetBundleName = bundleName + ".ab";
             assetBundleBuilds.Add(assetBundle);
 
-            //添加文件依赖信息
+            //添加文件资源依赖信息
             List<string> dependenceInfo = GetDependence(assetName);
             string bundleInfo = assetName + "|" + bundleName + ".ab";
             if (dependenceInfo.Count > 0)
@@ -73,11 +80,11 @@ public class BuildTool : Editor
             Directory.Delete(PathUtil.BundleOutPath, true);
         }
         Directory.CreateDirectory(PathUtil.BundleOutPath);
-        //打包Bundle 目录，压缩方式，目标平台
+        //打包Bundle，目标目录，压缩方式，目标平台
         BuildPipeline.BuildAssetBundles(PathUtil.BundleOutPath,assetBundleBuilds.ToArray(), BuildAssetBundleOptions.None, target);
         //写入文件信息，依赖关系
         File.WriteAllLines(PathUtil.BundleOutPath + "/" + AppConst.FileListName, bundleInfos);
-
+        //刷新
         AssetDatabase.Refresh();
     }
 

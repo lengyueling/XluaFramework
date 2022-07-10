@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 磁盘路径相关的工具类
+/// 既方便使用，还减少GC
+/// </summary>
 public class PathUtil
 {
     /// <summary>
@@ -16,6 +20,8 @@ public class PathUtil
 
     /// <summary>
     /// Bundle输出目录
+    /// 不一定是streamingAssets
+    /// 可以在这里更改
     /// </summary>
     public static readonly string BundleOutPath = Application.streamingAssetsPath;
 
@@ -31,6 +37,8 @@ public class PathUtil
 
     /// <summary>
     /// Bundle资源路径
+    /// 更新模式下返回可读写的目录sersistentDataPath
+    /// 其他模式返回只读目录streamingAssetsPath
     /// </summary>
     public static string BundleResourcePath
     {
@@ -39,10 +47,10 @@ public class PathUtil
             //更新模式（分包模式）下，ReadPath是空的
             if (AppConst.GameMode == GameMode.UpdateMode)
             {
-                //可读写的目录
+                //返回可读写的目录sersistentDataPath
                 return ReadWritePath;
             }
-            //只读目录
+            //返回只读目录streamingAssetsPath
             return ReadPath;
         }
     }
@@ -86,11 +94,21 @@ public class PathUtil
         return string.Format("Assets/BuildResources/UI/Prefabs/{0}.prefab", name);
     }
 
+    /// <summary>
+    /// 后缀需要手动传递
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public static string GetMusicPath(string name)
     {
         return string.Format("Assets/BuildResources/Audio/Music/{0}", name);
     }
 
+    /// <summary>
+    /// 后缀需要手动传递
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public static string GetSoundPath(string name)
     {
         return string.Format("Assets/BuildResources/Audio/Sound/{0}", name);
@@ -101,6 +119,11 @@ public class PathUtil
         return string.Format("Assets/BuildResources/Effect/Prefabs/{0}.prefab", name);
     }
 
+    /// <summary>
+    /// 后缀需要手动传递
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public static string GetSpritePath(string name)
     {
         return string.Format("Assets/BuildResources/Sprites/{0}", name);

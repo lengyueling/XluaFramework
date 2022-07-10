@@ -6,13 +6,22 @@ using UnityEngine.Networking;
 using System.IO;
 using Object = UnityEngine.Object;
 
+/// <summary>
+/// 资源热更新操作类
+/// </summary>
 public class HotUpdate : MonoBehaviour
 {
+    /// <summary>
+    /// 只读目录filelist的文件数据（）
+    /// </summary>
     byte[] m_ReadPathFileListData;
+    /// <summary>
+    /// 从服务器下载的filelist文件数据
+    /// </summary>
     byte[] m_ServerFileListData;
 
     /// <summary>
-    /// 文件信息
+    /// filelist中的文件信息
     /// </summary>
     internal class DownFileInfo
     {
@@ -38,7 +47,9 @@ public class HotUpdate : MonoBehaviour
             //TODO retry
         }
         info.fileData = webRequest.downloadHandler;
+        //执行回调函数
         Complete?.Invoke(info);
+        //释放UnityWebRequest对象
         webRequest.Dispose();
     }
 
@@ -66,10 +77,13 @@ public class HotUpdate : MonoBehaviour
     private List<DownFileInfo> GetFileList(string fileData,string path)
     {
         string content = fileData.Trim().Replace("\r", "");
+        //分割获取filelist内的多个文件
         string[] files = content.Split('\n');
+        //每一个文件一个downFileInfos，储存filelist中的文件信息，要将获取的信息储存进来
         List<DownFileInfo> downFileInfos = new List<DownFileInfo>(files.Length);
         for (int i = 0; i < files.Length; i++)
         {
+            //分割获取文件的多个部分（文件路径|bundle名|依赖文件列表）
             string[] info = files[i].Split('|');
             DownFileInfo fileInfo = new DownFileInfo();
             fileInfo.fileName = info[1];
@@ -115,7 +129,7 @@ public class HotUpdate : MonoBehaviour
 
     /// <summary>
     /// 释放资源
-    /// 下载只读文件夹的filelist
+    /// 下载只读文件夹中的filelist
     /// </summary>
     private void ReleaseResources()
     {
@@ -127,22 +141,24 @@ public class HotUpdate : MonoBehaviour
 
     /// <summary>
     /// 解析文件信息
-    /// 下载热更新资源
+    /// 根据filelist下载热更新资源到可读写目录
     /// </summary>
     /// <param name="file"></param>
     private void OnDownLoadReadPathFileListComplete(DownFileInfo file)
     {
+        //将只读目录的filelist数据赋值，供之后可读写目录使用
         m_ReadPathFileListData = file.fileData.data;
         List<DownFileInfo> fileInfos = GetFileList(file.fileData.text, PathUtil.ReadPath);
         StartCoroutine(DownLoadFile(fileInfos, OnReleaseFileComplete, OnReleaseAllFileComplete));
     }
 
     /// <summary>
-    /// 下载所有热更新资源后
-    /// 在可读写目录写入filelist
+    /// 下载所有热更新资源到可读写目录后后
+    /// 在可读写目录写入只读目录的filelist
     /// </summary>
     private void OnReleaseAllFileComplete()
     {
+        //在可读写目录写入只读目录的filelist
         FileUtil.WriteFile(Path.Combine(PathUtil.ReadWritePath, AppConst.FileListName), m_ReadPathFileListData);
         CheckUpdate();
     }
@@ -160,7 +176,7 @@ public class HotUpdate : MonoBehaviour
     }
 
     /// <summary>
-    /// 检查更新
+    /// 通过filelist检查版本更新
     /// </summary>
     private void CheckUpdate()
     {
@@ -171,8 +187,9 @@ public class HotUpdate : MonoBehaviour
     }
 
     /// <summary>
-    /// 对比现有本地目录和服务器目录的不同
-    /// 下载未下载的资源
+    /// 下载完成了所有的热更新文件后
+    /// 检查对比现有本地目录和服务器目录filelist的不同
+    /// 根据filelist下载还未下载的资源
     /// </summary>
     /// <param name="file"></param>
     private void OnDownLoadServerFileListComplete(DownFileInfo file)
@@ -182,16 +199,15 @@ public class HotUpdate : MonoBehaviour
         List<DownFileInfo> downListFiles = new List<DownFileInfo>();
         for (int i = 0; i < fileInfos.Count; i++)
         {
+            //通过课读写路径+文件名拼接获取本地路径，判断文件是否存在，若不存在则加入到需要加载资源的列表
             string localFile = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
-
-            //通过文件的md5来进行校验
             if (!FileUtil.IsExists(localFile))
             {
                 fileInfos[i].url = Path.Combine(AppConst.ResourcesUrl, fileInfos[i].fileName);
                 downListFiles.Add(fileInfos[i]);
             }
         }
-        //还有服务器资源没有被下载，下载资源
+        //加载资源的列表长度>0说明还有服务器资源没有被下载，下载资源
         if (downListFiles.Count > 0)
         {
             StartCoroutine(DownLoadFile(fileInfos, OnUpdateFileComplete, OnUpdateAllFileComplete));
@@ -208,6 +224,7 @@ public class HotUpdate : MonoBehaviour
     /// </summary>
     private void OnUpdateAllFileComplete()
     {
+        //更新完成后，需要把最新的filelist文件下载到本地ReadWritePath
         FileUtil.WriteFile(Path.Combine(PathUtil.ReadWritePath, AppConst.FileListName), m_ServerFileListData);
         EnterGame();
     }
@@ -224,6 +241,11 @@ public class HotUpdate : MonoBehaviour
         FileUtil.WriteFile(writeFile, file.fileData.data);
     }
 
+    /// <summary>
+    /// 开始游戏
+    /// 开始解析文件 加载资源
+    /// 如果不是编辑器模式，此时已经在可读写文件/只读目录获取了filelist
+    /// </summary>
     private void EnterGame()
     {
         //测试
@@ -231,6 +253,10 @@ public class HotUpdate : MonoBehaviour
         Manager.Resource.LoadUI("TestUI", OnComplete);
     }
 
+    /// <summary>
+    /// 回调函数
+    /// </summary>
+    /// <param name="obj"></param>
     private void OnComplete(Object obj)
     {
         GameObject go = Instantiate(obj) as GameObject;

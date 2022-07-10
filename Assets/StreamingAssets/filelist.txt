@@ -1,6 +1,0 @@
-Assets/BuildResources/UI/Prefabs/TestUI.prefab|ui/prefabs/testui.prefab.ab|Assets/BuildResources/UI/Res/Login/bg01.png|Assets/BuildResources/UI/Res/Login/loading.jpg|Assets/BuildResources/UI/Res/Login/game_title.png
-Assets/BuildResources/UI/Res/Login/bg01.png|ui/res/login/bg01.png.ab
-Assets/BuildResources/UI/Res/Login/game_tips.png|ui/res/login/game_tips.png.ab
-Assets/BuildResources/UI/Res/Login/game_title.png|ui/res/login/game_title.png.ab
-Assets/BuildResources/UI/Res/Login/loading.jpg|ui/res/login/loading.jpg.ab
-Assets/BuildResources/UI/Res/Login/loading_bar.png|ui/res/login/loading_bar.png.ab

@@ -6,6 +6,9 @@ using System;
 using Object = UnityEngine.Object;
 using UnityEditor;
 
+/// <summary>
+/// 资源加载管理器
+/// </summary>
 public class ResourceManager : MonoBehaviour
 {
     internal class BundleInfo
@@ -20,7 +23,7 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<string, BundleInfo> m_BundleInfos = new Dictionary<string, BundleInfo>();
 
     /// <summary>
-    /// 解析版本文件
+    /// 解析filelist文件
     /// </summary>
     public void ParseVersonFile()
     {
@@ -48,9 +51,10 @@ public class ResourceManager : MonoBehaviour
 
     /// <summary>
     /// 异步加载资源
+    /// LoadAsset的内部函数
     /// </summary>
-    /// <param name="assetName"></param>
-    /// <param name="action"></param>
+    /// <param name="assetName">加载资源名</param>
+    /// <param name="action">使用委托表示回调函数</param>
     /// <returns></returns>
     IEnumerator LoadBundleAsync(string assetName,Action<Object> action = null)
     {
@@ -65,12 +69,16 @@ public class ResourceManager : MonoBehaviour
                 yield return LoadBundleAsync(dependence[i]);
             }
         }
+        //加载资源路径
         AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundlePath);
         yield return request;
 
+        //加载资源
         AssetBundleRequest bundleRequest = request.assetBundle.LoadAssetAsync(assetName);
         yield return bundleRequest;
 
+        //调用回调函数，告诉应用层已经完成加载
+        //action?.Invoke(bundleRequest?.asset);与下面语句效果相同
         if (action != null && bundleRequest != null)
         {
             action.Invoke(bundleRequest.asset);
@@ -79,21 +87,24 @@ public class ResourceManager : MonoBehaviour
 
     /// <summary>
     /// 编辑器环境加载资源
+    /// LoadAsset的内部函数
     /// </summary>
     /// <param name="assetName"></param>
     /// <param name="action"></param>
     void EditorLoadAsset(string assetName,Action<Object> action = null)
     {
-        Object obj = AssetDatabase.LoadAssetAtPath(assetName, typeof(Object));
+        Object obj = UnityEditor.AssetDatabase.LoadAssetAtPath(assetName, typeof(Object));
         if (obj == null)
         {
-            Debug.LogError("assets name is not exist" + assetName);
+            Debug.LogError("资源文件不存在" + assetName);
         }
+        //执行回调函数，前提是action不为null
         action?.Invoke(obj);
     }
 
     /// <summary>
     /// 加载资源
+    /// Load各种类型资源的内部函数
     /// </summary>
     /// <param name="assetName"></param>
     /// <param name="action"></param>
