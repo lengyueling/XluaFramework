@@ -1,6 +1,23 @@
 Manager = CS.Manager;
+
+--可以随意热更新ui层级分组
+local group = 
+{
+	"Main",
+	"UI",
+	"Box",
+}
+
+--设置UI层级分组
+Manager.UI:SetUIGroup(group);
+
+--C# 外部固定执行的函数
 function Main()
-	print("hello main function");
-	Manager.UI:OpenUI("TestUI","ui.TestUI")
+	print("hello main");
+	Manager.UI:OpenUI("TestUI1","Main","ui.TestUI")
+	Manager.UI:OpenUI("TestUI2","UI","ui.TestUI")
+	Manager.UI:OpenUI("TestUI3","Box","ui.TestUI")
+	print("main end");
 end
+
 -- Main()
