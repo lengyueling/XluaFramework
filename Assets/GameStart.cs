@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using XLua;
 
 public class GameStart : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GameStart : MonoBehaviour
             ()=> 
             {
                 Manager.Lua.StartLua("main");
-                XLua.LuaFunction func = Manager.Lua.LuaEnv.Global.Get<XLua.LuaFunction>("Main");
+                LuaFunction func = Manager.Lua.LuaEnv.Global.Get<LuaFunction>("Main");
                 func.Call();
             });
     }
