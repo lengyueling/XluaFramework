@@ -6,7 +6,58 @@ function OnOpen()
 	print("TestUI OnOpen")
 	--叠加加载场景
 	--参数：场景名，使用的lua脚本
-	Manager.Scene:LoadScene("Test01","scene.Scene01");
+	--Manager.Scene:LoadScene("Test01","scene.Scene01");
+
+	-- 获取到TestUI界面上的按钮和滑动条
+	local btn_play_music = self.transform:Find("btn_play_music"):GetComponent("Button");
+	local btn_pause_music = self.transform:Find("btn_pause_music"):GetComponent("Button");
+	local btn_unpause_music = self.transform:Find("btn_unpause_music"):GetComponent("Button");
+	local btn_stop_music = self.transform:Find("btn_stop_music"):GetComponent("Button");
+	local btn_play_sound = self.transform:Find("btn_play_sound"):GetComponent("Button");
+
+	local slider_music_volume = self.transform:Find("slider_music_volume"):GetComponent("Slider");
+	local slider_sound_volume = self.transform:Find("slider_sound_volume"):GetComponent("Slider");
+
+	--调用点击事件
+	btn_play_music.onClick:AddListener(
+		function()
+			Manager.Sound:PlayMusic("dayu.mp3");
+		end)
+
+	btn_pause_music.onClick:AddListener( 
+		function()
+			Manager.Sound:PauseMusic();
+		end)
+
+	btn_unpause_music.onClick:AddListener(
+		function()
+			Manager.Sound:OnUnPauseMusic();
+		end)
+
+	btn_stop_music.onClick:AddListener(
+		function()
+			Manager.Sound:StopMusic();
+		end)
+
+	btn_play_sound.onClick:AddListener(
+		function()
+			Manager.Sound:PlaySound("ui_touch.wav");
+		end)
+
+	--调用滑动事件
+	--因为lua中要调用slider的onValueChanged事件，需要float类型的参数，所以在xlua脚本中需要加一个标签（Xlua-Editor-ExampleConfig.cs）
+	slider_music_volume.onValueChanged:AddListener(
+		function(volume)
+			Manager.Sound:SetMusicVolume(volume);
+		end)
+
+	slider_sound_volume.onValueChanged:AddListener(
+		function(volume)
+			Manager.Sound:SetSoundVolume(volume);
+		end)
+
+	slider_music_volume.value = 1;
+	slider_sound_volume.value = 1;
 end
 
 function Update()

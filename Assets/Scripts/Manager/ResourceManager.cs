@@ -21,9 +21,16 @@ public class ResourceManager : MonoBehaviour
         public List<string> Dependences;
     }
     /// <summary>
-    /// 存放解析出来的Bundle信息的集合
+    /// 存放解析出来的Bundle信息（BundleInfo>）的集合
     /// </summary>
     private Dictionary<string, BundleInfo> m_BundleInfos = new Dictionary<string, BundleInfo>();
+
+    /// <summary>
+    /// 存放Bundle资源的集合
+    /// 每次将加载的bundle存起来
+    /// 就不会重复加载造成报错了
+    /// </summary>
+    private Dictionary<string, AssetBundle> m_AssetBundles = new Dictionary<string, AssetBundle>();
 
     /// <summary>
     /// 解析filelist文件
@@ -71,18 +78,25 @@ public class ResourceManager : MonoBehaviour
         string bundleName = m_BundleInfos[assetName].BundleName;
         string bundlePath = Path.Combine(PathUtil.BundleResourcePath, bundleName);
         List<string> dependence = m_BundleInfos[assetName].Dependences;
-        //加载依赖资源
-        if (dependence != null && dependence.Count > 0)
-        {
-            for (int i = 0; i < dependence.Count; i++)
-            {
-                yield return LoadBundleAsync(dependence[i]);
-            }
-        }
-        //加载资源路径
-        AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundlePath);
-        yield return request;
 
+        //这样写就不会重复加载资源了
+        AssetBundle bundle = GetBundle(bundleName);
+        if (bundle == null)
+        {
+            //加载依赖资源
+            if (dependence != null && dependence.Count > 0)
+            {
+                for (int i = 0; i < dependence.Count; i++)
+                {
+                    yield return LoadBundleAsync(dependence[i]);
+                }
+            }
+            //加载资源路径
+            AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundlePath);
+            yield return request;
+            bundle = request.assetBundle;
+            m_AssetBundles.Add(bundleName, bundle);
+        }
         //ab包无法加载场景，如果加载的是场景则直接返回
         if (assetName.EndsWith(".unity"))
         {
@@ -91,7 +105,7 @@ public class ResourceManager : MonoBehaviour
         }
 
         //加载资源
-        AssetBundleRequest bundleRequest = request.assetBundle.LoadAssetAsync(assetName);
+        AssetBundleRequest bundleRequest = bundle.LoadAssetAsync(assetName);
         yield return bundleRequest;
 
         //调用回调函数，告诉应用层已经完成加载
@@ -101,6 +115,21 @@ public class ResourceManager : MonoBehaviour
             action.Invoke(bundleRequest.asset);
         }
     }
+    /// <summary>
+    /// 获取m-AssetBundles字典中的bundle资源
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    AssetBundle GetBundle(string name)
+    {
+        AssetBundle bundle = null;
+        if (m_AssetBundles.TryGetValue(name,out bundle))
+        {
+            return bundle;
+        }
+        return null;
+    }
+
 #if UNITY_EDITOR
     /// <summary>
     /// 编辑器环境加载资源

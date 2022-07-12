@@ -1,68 +1,77 @@
 ManifestFileVersion: 0
-CRC: 3500967518
+CRC: 2297696385
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: luascripts/main.bytes.ab
+      Name: audio/music/dayu.mp3.ab
       Dependencies: {}
     Info_1:
-      Name: luascripts/entity/playerentity.bytes.ab
+      Name: audio/sound/ui_touch.wav.ab
       Dependencies: {}
     Info_2:
-      Name: luascripts/scene/scene01.bytes.ab
+      Name: luascripts/main.bytes.ab
       Dependencies: {}
     Info_3:
-      Name: luascripts/scene/scene02.bytes.ab
+      Name: luascripts/entity/playerentity.bytes.ab
       Dependencies: {}
     Info_4:
-      Name: luascripts/ui/testui.bytes.ab
+      Name: luascripts/scene/scene01.bytes.ab
       Dependencies: {}
     Info_5:
-      Name: model/mat/player.mat.ab
+      Name: luascripts/scene/scene02.bytes.ab
       Dependencies: {}
     Info_6:
-      Name: model/mat/test01.mat.ab
+      Name: luascripts/ui/testui.bytes.ab
       Dependencies: {}
     Info_7:
-      Name: model/mat/test02.mat.ab
+      Name: model/mat/player.mat.ab
       Dependencies: {}
     Info_8:
+      Name: model/mat/test01.mat.ab
+      Dependencies: {}
+    Info_9:
+      Name: model/mat/test02.mat.ab
+      Dependencies: {}
+    Info_10:
       Name: model/prefabs/player.prefab.ab
       Dependencies:
         Dependency_0: model/mat/player.mat.ab
-    Info_9:
+    Info_11:
       Name: scenes/test01.unity.ab
       Dependencies:
         Dependency_0: model/mat/test01.mat.ab
-    Info_10:
+    Info_12:
       Name: scenes/test02.unity.ab
       Dependencies:
         Dependency_0: model/mat/test02.mat.ab
-    Info_11:
+    Info_13:
+      Name: ui/prefabs/testui.prefab.ab
+      Dependencies: {}
+    Info_14:
       Name: ui/prefabs/testui1.prefab.ab
       Dependencies:
         Dependency_0: ui/res/login/bg01.png.ab
         Dependency_1: ui/res/login/game_title.png.ab
-    Info_12:
+    Info_15:
       Name: ui/prefabs/testui2.prefab.ab
       Dependencies:
         Dependency_0: ui/res/login/loading.jpg.ab
-    Info_13:
+    Info_16:
       Name: ui/prefabs/testui3.prefab.ab
       Dependencies:
         Dependency_0: ui/res/login/game_tips.png.ab
-    Info_14:
+    Info_17:
       Name: ui/res/login/bg01.png.ab
       Dependencies: {}
-    Info_15:
+    Info_18:
       Name: ui/res/login/game_tips.png.ab
       Dependencies: {}
-    Info_16:
+    Info_19:
       Name: ui/res/login/game_title.png.ab
       Dependencies: {}
-    Info_17:
+    Info_20:
       Name: ui/res/login/loading.jpg.ab
       Dependencies: {}
-    Info_18:
+    Info_21:
       Name: ui/res/login/loading_bar.png.ab
       Dependencies: {}

@@ -33,7 +33,9 @@ function Main()
     --参数：要打开UI资源的名字，UI分组名，使用的Lua文件
 	--Manager.UI:OpenUI("TestUI1","Main","ui.TestUI")
 	--Manager.UI:OpenUI("TestUI2","UI","ui.TestUI")
-	Manager.UI:OpenUI("TestUI3","Box","ui.TestUI")
+	--Manager.UI:OpenUI("TestUI3","Box","ui.TestUI")
+	
+	Manager.UI:OpenUI("TestUI","Main","ui.TestUI")
 	print("main end");
 end
 

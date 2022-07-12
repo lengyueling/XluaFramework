@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Tencent is pleased to support the open source community by making xLua available.
  * Copyright (C) 2016 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
@@ -15,6 +15,11 @@ using System.Linq;
 //配置的详细介绍请看Doc下《XLua的配置.doc》
 public static class ExampleConfig
 {
+    [CSharpCallLua]
+    public static List<Type> mymodule_cs_call_lua_list = new List<Type>()
+    {
+        typeof(UnityEngine.Events.UnityAction<float>),
+    };
     /***************如果你全lua编程，可以参考这份自动化配置***************/
     //--------------begin 纯lua编程配置参考----------------------------
     //static List<string> exclude = new List<string> {
@@ -276,6 +281,10 @@ public static class ExampleConfig
                 new List<string>(){"System.IO.DirectoryInfo", "CreateSubdirectory", "System.String", "System.Security.AccessControl.DirectorySecurity"},
                 new List<string>(){"System.IO.DirectoryInfo", "Create", "System.Security.AccessControl.DirectorySecurity"},
                 new List<string>(){"UnityEngine.MonoBehaviour", "runInEditMode"},
+
+                new List<string>(){"UnityEngine.Light","shadowRadius"},
+                new List<string>(){"UnityEngine.Light","SetLightDirty"},
+                new List<string>(){"UnityEngine.Light","shadowAngle"},
             };
 
 #if UNITY_2018_1_OR_NEWER
