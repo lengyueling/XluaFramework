@@ -1,21 +1,38 @@
+-- 使用到的Unity中的类
 Manager = CS.Manager;
+PathUtil = CS.PathUtil;
+Vector3 = CS.UnityEngine.Vector3;
+Input = CS.UnityEngine.Input;
+KeyCode = CS.UnityEngine.KeyCode;
+Time = CS.UnityEngine.Time;
 
 --可以随意热更新ui层级分组
-local group = 
+local ui_group = 
 {
 	"Main",
 	"UI",
 	"Box",
 }
 
---设置UI层级分组
-Manager.UI:SetUIGroup(group);
+--实体层级分组
+local entity_group = 
+{
+	"Player",
+	"Monster",
+	"Effect",
+}
+
+--设置分组层级
+Manager.UI:SetUIGroup(ui_group);
+Manager.Entity:SetEntityGroup(entity_group);
 
 --C# 外部固定执行的函数
 function Main()
 	print("hello main");
-	Manager.UI:OpenUI("TestUI1","Main","ui.TestUI")
-	Manager.UI:OpenUI("TestUI2","UI","ui.TestUI")
+	--打开UI，实例化对应实体
+    --参数：要打开UI资源的名字，UI分组名，使用的Lua文件
+	--Manager.UI:OpenUI("TestUI1","Main","ui.TestUI")
+	--Manager.UI:OpenUI("TestUI2","UI","ui.TestUI")
 	Manager.UI:OpenUI("TestUI3","Box","ui.TestUI")
 	print("main end");
 end

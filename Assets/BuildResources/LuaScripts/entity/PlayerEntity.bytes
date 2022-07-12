@@ -1,0 +1,24 @@
+function OnInit()
+	print("PlayerEntity OnInit")
+end
+
+function OnShow()
+	print("PlayerEntity OnOpen")
+	--初始化实体位置
+	self.transform.localPosition = Vector3(0,1,0)
+end
+
+function Update()
+	print("PlayerEntity Update")
+	-- 实现键盘控制
+	if Input.GetKey(KeyCode.W) then
+		self.transform:Translate(self.transform.forward * Time.deltaTime * 5);
+	end
+	if Input.GetKey(KeyCode.S) then
+		self.transform:Translate(-self.transform.forward * Time.deltaTime * 5);
+	end
+end
+
+function OnHide()
+	print("PlayerEntity OnHide")
+end

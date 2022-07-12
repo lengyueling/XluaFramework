@@ -1,0 +1,28 @@
+function OnInit()
+	print("Scene02 OnInit")
+end
+
+function OnActive()
+	print("Scene02 OnActive")
+end
+
+function OnEnter()
+	print("Scene02 OnEnter")
+    --显示实体，实例化对应实体
+    --参数：要打开实体资源的名字，实体分组名，使用的Lua文件
+	Manager.Entity:ShowEntity(PathUtil.GetModelPath("Player"),"Player","entity.PlayerEntity")
+	--叠加多个场景时需要至少设置一个被激活的场景
+	--Manager.Scene:SetActive(self.SceneName);
+end
+
+function Update()
+	print("Scene02 Update")
+end
+
+function OnInActive()
+	print("Scene02 OnInActive")
+end
+
+function OnQuit()
+	print("Scene02 OnQuit")
+end

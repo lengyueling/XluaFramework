@@ -1,0 +1,29 @@
+function OnInit()
+	print("Scene01 OnInit")
+end
+
+function OnActive()
+	print("Scene01 OnActive")
+end
+
+function OnEnter()
+	print("Scene01 OnEnter")
+	--切换场景
+	--参数：场景名，使用的lua脚本
+	Manager.Scene:ChangeScene("Test02","scene.Scene02");
+	--Manager.Scene:LoadScene("Test02","scene.Scene02");
+	--叠加多个场景时需要至少设置一个被激活的场景
+	--Manager.Scene:SetActive(self.SceneName);
+end
+
+function Update()
+	print("Scene01 Update")
+end
+
+function OnInActive()
+	print("Scene01 OnInActive")
+end
+
+function OnQuit()
+	print("Scene01 OnQuit")
+end

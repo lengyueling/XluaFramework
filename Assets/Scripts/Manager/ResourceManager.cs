@@ -83,6 +83,13 @@ public class ResourceManager : MonoBehaviour
         AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundlePath);
         yield return request;
 
+        //ab包无法加载场景，如果加载的是场景则直接返回
+        if (assetName.EndsWith(".unity"))
+        {
+            action?.Invoke(null);
+            yield break;
+        }
+
         //加载资源
         AssetBundleRequest bundleRequest = request.assetBundle.LoadAssetAsync(assetName);
         yield return bundleRequest;

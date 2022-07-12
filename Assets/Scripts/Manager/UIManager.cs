@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     /// lua代码中编写
     /// </summary>
     /// <param name="uiName">要打开UI资源的名字</param>
-    /// <param name="luaName">Lua模拟MonoBehaviour使用的文件</param>
+    /// <param name="luaName">使用的Lua文件</param>
     /// <param name="group">ui分组名</param>
     public void OpenUI(string uiName, string group, string luaName)
     {

@@ -60,9 +60,9 @@ public class EntityManager : MonoBehaviour
     /// 实例化对应实体
     /// Lua代码中编写
     /// </summary>
-    /// <param name="name">要打开UI资源的名字</param>
+    /// <param name="name">要打开实体资源的名字</param>
     /// <param name="group">实体分组名</param>
-    /// <param name="luaName">Lua模拟MonoBehaviour使用的文件</param>
+    /// <param name="luaName">使用的Lua文件</param>
     public void ShowEntity(string name, string group, string luaName)
     {
         GameObject entity = null;

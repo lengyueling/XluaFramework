@@ -1,15 +1,18 @@
 function OnInit()
-	print("lua oninit")
+	print("TestUI OnInit")
 end
 
 function OnOpen()
-	print("lua onopen")
+	print("TestUI OnOpen")
+	--叠加加载场景
+	--参数：场景名，使用的lua脚本
+	Manager.Scene:LoadScene("Test01","scene.Scene01");
 end
 
 function Update()
-	print("lua update")
+	print("TestUI Update")
 end
 
 function OnClose()
-	print("lua onclose")
+	print("TestUI OnClose")
 end
