@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -162,6 +162,11 @@ public class ResourceManager : MonoBehaviour
     public void LoadLua(string assetName, Action<Object> action = null)
     {
         LoadAsset(assetName, action);
+    }
+
+    public void LoadPrefab(string path, Action<Object> action = null)
+    {
+        LoadAsset(path, action);
     }
 
     //TODO: 卸载

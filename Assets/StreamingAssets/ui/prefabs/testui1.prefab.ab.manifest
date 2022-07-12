@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3214544982
+CRC: 3875497902
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d65b4e0f8cdbb8635dd55df42d1ee3e5
+    Hash: 87cc7cd5108ef638ae18bf4fc9185dc4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 690aabce864bbc79a775d251dcebbc9c
@@ -38,4 +38,3 @@ Assets:
 Dependencies:
 - E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/bg01.png.ab
 - E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/game_title.png.ab
-- E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/loading.jpg.ab

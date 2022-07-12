@@ -1,6 +1,6 @@
 Assets/BuildResources/LuaScripts/main.bytes|luascripts/main.bytes.ab
 Assets/BuildResources/LuaScripts/ui/TestUI.bytes|luascripts/ui/testui.bytes.ab
-Assets/BuildResources/UI/Prefabs/TestUI1.prefab|ui/prefabs/testui1.prefab.ab|Assets/BuildResources/UI/Res/Login/bg01.png|Assets/BuildResources/UI/Res/Login/loading.jpg|Assets/BuildResources/UI/Res/Login/game_title.png
+Assets/BuildResources/UI/Prefabs/TestUI1.prefab|ui/prefabs/testui1.prefab.ab|Assets/BuildResources/UI/Res/Login/bg01.png|Assets/BuildResources/UI/Res/Login/game_title.png
 Assets/BuildResources/UI/Prefabs/TestUI2.prefab|ui/prefabs/testui2.prefab.ab|Assets/BuildResources/UI/Res/Login/loading.jpg
 Assets/BuildResources/UI/Prefabs/TestUI3.prefab|ui/prefabs/testui3.prefab.ab|Assets/BuildResources/UI/Res/Login/game_tips.png
 Assets/BuildResources/UI/Res/Login/bg01.png|ui/res/login/bg01.png.ab

@@ -1,10 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 监听者模式
 /// 作为所有manager的入口
+/// 管理所有的manager
 /// </summary>
 public class Manager : MonoBehaviour
 {
@@ -25,10 +26,24 @@ public class Manager : MonoBehaviour
         get { return _ui; }
     }
 
+    private static EntityManager _entity;
+    public static EntityManager Entity
+    {
+        get { return _entity; }
+    }
+
+    private static SceneManager _scene;
+    public static SceneManager Scene
+    {
+        get { return _scene; }
+    }
+
     private void Awake()
     {
         _resource = this.gameObject.AddComponent<ResourceManager>();
         _lua = this.gameObject.AddComponent<LuaManager>();
         _ui = this.gameObject.AddComponent<UIManager>();
+        _entity = this.gameObject.AddComponent<EntityManager>();
+        _scene = this.gameObject.AddComponent<SceneManager>();
     }
 }

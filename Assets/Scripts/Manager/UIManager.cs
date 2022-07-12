@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+/// <summary>
+/// UI热更新管理
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     /// <summary>
-    /// 缓存UI字典
+    /// UI缓存字典
     /// </summary>
     Dictionary<string, GameObject> m_UI = new Dictionary<string, GameObject>();
     /// <summary>
     /// UI层级分组字典
     /// </summary>
     Dictionary<string, Transform> m_UIGroups = new Dictionary<string, Transform>();
-
     /// <summary>
     /// UI根节点
     /// </summary>
@@ -29,7 +31,7 @@ public class UIManager : MonoBehaviour
     /// UI分组也需要热更新
     /// 因此该在lua脚本中被调用
     /// </summary>
-    /// <param name="group"></param>
+    /// <param name="group">lua代码中进行热更新传递分组</param>
     public void SetUIGroup(List<string> group)
     {
         for (int i = 0; i < group.Count; i++)

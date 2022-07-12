@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -110,6 +110,7 @@ public class PathUtil
     }
 
     /// <summary>
+    /// 获取音乐路径
     /// 后缀需要手动传递
     /// </summary>
     /// <param name="name"></param>
@@ -120,6 +121,7 @@ public class PathUtil
     }
 
     /// <summary>
+    /// 获取音效路径
     /// 后缀需要手动传递
     /// </summary>
     /// <param name="name"></param>
@@ -134,7 +136,13 @@ public class PathUtil
         return string.Format("Assets/BuildResources/Effect/Prefabs/{0}.prefab", name);
     }
 
+    public static string GetModelPath(string name)
+    {
+        return string.Format("Assets/BuildResources/Model/Prefabs/{0}.prefab", name);
+    }
+
     /// <summary>
+    /// 获取ui图片路径
     /// 后缀需要手动传递
     /// </summary>
     /// <param name="name"></param>
