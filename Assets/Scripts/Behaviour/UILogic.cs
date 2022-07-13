@@ -6,6 +6,11 @@ using UnityEngine;
 public class UILogic : LuaBehaviour
 {
     /// <summary>
+    /// 资源名字
+    /// 用于对象池
+    /// </summary>
+	public string AssetName;
+    /// <summary>
     /// 打开UI资源执行的委托函数
     /// </summary>
     private Action m_LuaOnOpen;
@@ -40,6 +45,7 @@ public class UILogic : LuaBehaviour
     public void OnClose()
     {
         m_LuaOnClose?.Invoke();
+        Manager.Pool.UnSpawn("UI", AssetName, this.gameObject);
     }
 
     /// <summary>

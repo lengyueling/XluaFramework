@@ -10,10 +10,6 @@ using Object = UnityEngine.Object;
 public class UIManager : MonoBehaviour
 {
     /// <summary>
-    /// UI缓存字典
-    /// </summary>
-    Dictionary<string, GameObject> m_UI = new Dictionary<string, GameObject>();
-    /// <summary>
     /// UI层级分组字典
     /// </summary>
     Dictionary<string, Transform> m_UIGroups = new Dictionary<string, Transform>();
@@ -21,6 +17,7 @@ public class UIManager : MonoBehaviour
     /// UI根节点
     /// </summary>
     private Transform m_UIParent;
+
     private void Awake()
     {
         m_UIParent = this.transform.parent.Find("UI");
@@ -67,9 +64,15 @@ public class UIManager : MonoBehaviour
     public void OpenUI(string uiName, string group, string luaName)
     {
         GameObject ui = null;
-        //如果之前已经缓存（使用）过了这个ui则直接调用，不需要重新加载资源
-        if (m_UI.TryGetValue(uiName,out ui))
+		Transform parent = GetUIGroup(group);
+        string uiPath = PathUtil.GetUIPath(uiName);
+        Object uiObj = Manager.Pool.Spawn("UI", uiPath);
+        //如果之前对象池中已经有了资源则不需要重复加载
+        if (uiObj != null)
         {
+            ui = uiObj as GameObject;
+            ui.transform.SetParent(parent, false);
+
             UILogic uiLogic = ui.GetComponent<UILogic>();
             uiLogic.OnOpen();
             return;
@@ -78,12 +81,12 @@ public class UIManager : MonoBehaviour
         Manager.Resource.LoadUI(uiName, (Object obj) =>
          {
              ui = Instantiate(obj) as GameObject;
-             m_UI.Add(uiName, ui);
              //设置当前ui的父物体，是各个分组名所在的对象
-             Transform parent = GetUIGroup(group);
+             
              ui.transform.SetParent(parent, false);
-             //执行初始化 OnOpen()函数
+             //执行初始化 OnOpen()函数 设置资源名字
              UILogic uiLogic = ui.AddComponent<UILogic>();
+             uiLogic.AssetName = uiPath;
              uiLogic.Init(luaName);
              uiLogic.OnOpen();
          });

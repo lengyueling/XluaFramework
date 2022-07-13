@@ -15,6 +15,10 @@ function OnOpen()
 	local btn_stop_music = self.transform:Find("btn_stop_music"):GetComponent("Button");
 	local btn_play_sound = self.transform:Find("btn_play_sound"):GetComponent("Button");
 
+	--对象池测试
+	local btn_pooltest = self.transform:Find("btn_pooltest"):GetComponent("Button");
+	local btn_close = self.transform:Find("btn_close"):GetComponent("Button");
+
 	local slider_music_volume = self.transform:Find("slider_music_volume"):GetComponent("Slider");
 	local slider_sound_volume = self.transform:Find("slider_sound_volume"):GetComponent("Slider");
 
@@ -42,6 +46,16 @@ function OnOpen()
 	btn_play_sound:OnClickSet(
 		function()
 			Manager.Sound:PlaySound("ui_touch.wav");
+		end)
+
+	btn_pooltest:OnClickSet(
+		function()
+			Manager.UI:OpenUI("TestUI","UI","ui.TestUI");
+		end)
+
+	btn_close:OnClickSet(
+		function()
+			self:OnClose();
 		end)
 
 	--调用滑动事件

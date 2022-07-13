@@ -205,5 +205,13 @@ public class ResourceManager : MonoBehaviour
         LoadAsset(path, action);
     }
 
-    //TODO: 卸载
+
+    /// <summary>
+    /// 卸载资源
+    /// </summary>
+    /// <param name="name"></param>
+    public void UnloadBundle(string name)
+    {
+
+    }
 }
