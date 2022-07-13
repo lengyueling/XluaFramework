@@ -19,39 +19,39 @@ function OnOpen()
 	local slider_sound_volume = self.transform:Find("slider_sound_volume"):GetComponent("Slider");
 
 	--调用点击事件
-	btn_play_music.onClick:AddListener(
+	btn_play_music:OnClickSet(
 		function()
 			Manager.Sound:PlayMusic("dayu.mp3");
 		end)
 
-	btn_pause_music.onClick:AddListener( 
+	btn_pause_music:OnClickSet( 
 		function()
 			Manager.Sound:PauseMusic();
 		end)
 
-	btn_unpause_music.onClick:AddListener(
+	btn_unpause_music:OnClickSet(
 		function()
 			Manager.Sound:OnUnPauseMusic();
 		end)
 
-	btn_stop_music.onClick:AddListener(
+	btn_stop_music:OnClickSet(
 		function()
 			Manager.Sound:StopMusic();
 		end)
 
-	btn_play_sound.onClick:AddListener(
+	btn_play_sound:OnClickSet(
 		function()
 			Manager.Sound:PlaySound("ui_touch.wav");
 		end)
 
 	--调用滑动事件
 	--因为lua中要调用slider的onValueChanged事件，需要float类型的参数，所以在xlua脚本中需要加一个标签（Xlua-Editor-ExampleConfig.cs）
-	slider_music_volume.onValueChanged:AddListener(
+	slider_music_volume:OnValueChangedSet(
 		function(volume)
 			Manager.Sound:SetMusicVolume(volume);
 		end)
 
-	slider_sound_volume.onValueChanged:AddListener(
+	slider_sound_volume:OnValueChangedSet(
 		function(volume)
 			Manager.Sound:SetSoundVolume(volume);
 		end)

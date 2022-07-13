@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -25,16 +25,10 @@ public class LuaManager : MonoBehaviour
     public LuaEnv LuaEnv;
 
     /// <summary>
-    /// lua脚本加载完成的委托
-    /// </summary>
-    Action InitOK;
-
-    /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(Action init)
+    public void Init()
     {
-        InitOK += init;
         LuaEnv = new LuaEnv();
 
         //lua虚拟机注册回调获取lua脚本
@@ -103,7 +97,8 @@ public class LuaManager : MonoBehaviour
                  //就说明加载完成了
                  if (m_LuaScripts.Count >= LuaNames.Count)
                  {
-                     InitOK?.Invoke();
+                     //执行init事件
+                     Manager.Event.Fire(10000);
                      //重置需要加载文件的列表
                      LuaNames.Clear();
                      LuaNames = null;
@@ -138,7 +133,8 @@ public class LuaManager : MonoBehaviour
             byte[] file = File.ReadAllBytes(fileName);
             AddLuaScript(PathUtil.GetUnityPath(fileName), file);
         }
-        InitOK?.Invoke();
+        //执行init事件
+        Manager.Event.Fire(10000);
     }
 #endif
 
