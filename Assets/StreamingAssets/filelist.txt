@@ -11,10 +11,11 @@ Assets/BuildResources/Model/mat/test02.mat|model/mat/test02.mat.ab
 Assets/BuildResources/Model/Prefabs/Player.prefab|model/prefabs/player.prefab.ab|Assets/BuildResources/Model/mat/player.mat
 Assets/BuildResources/Scenes/Test01.unity|scenes/test01.unity.ab|Assets/BuildResources/Model/mat/test01.mat
 Assets/BuildResources/Scenes/Test02.unity|scenes/test02.unity.ab|Assets/BuildResources/Model/mat/test02.mat
-Assets/BuildResources/UI/Prefabs/TestUI.prefab|ui/prefabs/testui.prefab.ab
+Assets/BuildResources/UI/Prefabs/TestUI.prefab|ui/prefabs/testui.prefab.ab|Assets/BuildResources/UI/Res/Login/loading_bar.png
 Assets/BuildResources/UI/Prefabs/TestUI1.prefab|ui/prefabs/testui1.prefab.ab|Assets/BuildResources/UI/Res/Login/bg01.png|Assets/BuildResources/UI/Res/Login/game_title.png
 Assets/BuildResources/UI/Prefabs/TestUI2.prefab|ui/prefabs/testui2.prefab.ab|Assets/BuildResources/UI/Res/Login/loading.jpg
 Assets/BuildResources/UI/Prefabs/TestUI3.prefab|ui/prefabs/testui3.prefab.ab|Assets/BuildResources/UI/Res/Login/game_tips.png
+Assets/BuildResources/UI/Prefabs/Login/LoginUI.prefab|ui/prefabs/login/loginui.prefab.ab
 Assets/BuildResources/UI/Res/Login/bg01.png|ui/res/login/bg01.png.ab
 Assets/BuildResources/UI/Res/Login/game_tips.png|ui/res/login/game_tips.png.ab
 Assets/BuildResources/UI/Res/Login/game_title.png|ui/res/login/game_title.png.ab

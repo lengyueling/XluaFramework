@@ -50,7 +50,7 @@ function OnOpen()
 
 	btn_pooltest:OnClickSet(
 		function()
-			Manager.UI:OpenUI("TestUI","UI","ui.TestUI");
+			Manager.UI:OpenUI("Login/LoginUI","UI","ui.TestUI");
 		end)
 
 	btn_close:OnClickSet(

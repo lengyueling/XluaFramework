@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2297696385
+CRC: 2577911166
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -46,7 +46,8 @@ AssetBundleManifest:
         Dependency_0: model/mat/test02.mat.ab
     Info_13:
       Name: ui/prefabs/testui.prefab.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: ui/res/login/loading_bar.png.ab
     Info_14:
       Name: ui/prefabs/testui1.prefab.ab
       Dependencies:
@@ -61,17 +62,20 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: ui/res/login/game_tips.png.ab
     Info_17:
-      Name: ui/res/login/bg01.png.ab
+      Name: ui/prefabs/login/loginui.prefab.ab
       Dependencies: {}
     Info_18:
-      Name: ui/res/login/game_tips.png.ab
+      Name: ui/res/login/bg01.png.ab
       Dependencies: {}
     Info_19:
-      Name: ui/res/login/game_title.png.ab
+      Name: ui/res/login/game_tips.png.ab
       Dependencies: {}
     Info_20:
-      Name: ui/res/login/loading.jpg.ab
+      Name: ui/res/login/game_title.png.ab
       Dependencies: {}
     Info_21:
+      Name: ui/res/login/loading.jpg.ab
+      Dependencies: {}
+    Info_22:
       Name: ui/res/login/loading_bar.png.ab
       Dependencies: {}

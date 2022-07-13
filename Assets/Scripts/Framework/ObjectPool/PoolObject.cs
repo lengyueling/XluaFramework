@@ -10,17 +10,17 @@ using Object = UnityEngine.Object;
 public class PoolObject
 {
     /// <summary>
-    /// 具体对象
+    /// 对象池具体对象
     /// </summary>
     public Object Object;
 
     /// <summary>
-    /// 对象名字
+    /// 对象池对象名字
     /// </summary>
     public string Name;
 
     /// <summary>
-    /// 最后一次使用时间
+    /// 对象池最后一次使用时间
     /// （定期销毁）
     /// </summary>
     public DateTime LastUseTime;

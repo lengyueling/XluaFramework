@@ -51,7 +51,7 @@ public class GameObjectPool : PoolBase
             {
                 Debug.Log("GameObjectPool 释放时间:" + System.DateTime.Now);
                 Destroy(item.Object);
-                //Manager.Resource.MinusBundleCount(item.Name);
+                Manager.Resource.MinusBundleCount(item.Name);
                 m_Objects.Remove(item);
                 //递归自己，让自己能够跳出函数
                 Release();

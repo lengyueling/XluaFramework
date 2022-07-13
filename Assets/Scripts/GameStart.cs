@@ -26,7 +26,7 @@ public class GameStart : MonoBehaviour
         Manager.Pool.CreateGameObjectPool("UI", 10);
         Manager.Pool.CreateGameObjectPool("Monster", 120);
         Manager.Pool.CreateGameObjectPool("Effect", 120);
-        Manager.Pool.CreateAssetPool("AssetBundle", 300);
+        Manager.Pool.CreateAssetPool("AssetBundle", 10);
 
     }
 

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2996047558
+CRC: 3553123301
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 779eb0da6a4443fbc055c12f53d9b504
+    Hash: 0dc5cd020b7e9e6045bd37d41932774f
   TypeTreeHash:
     serializedVersion: 2
     Hash: b3f8d262fa9235fce84824a9f52a017b
@@ -36,6 +36,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/BuildResources/UI/Prefabs/TestUI.prefab
-Dependencies:
-- E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/loading_bar.png.ab
+- Assets/BuildResources/UI/Prefabs/Login/LoginUI.prefab
+Dependencies: []
