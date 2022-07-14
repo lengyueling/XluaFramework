@@ -214,6 +214,7 @@ public class HotUpdate : MonoBehaviour
         {
             //通过课读写路径+文件名拼接获取本地路径，判断文件是否存在，若不存在则加入到需要加载资源的列表
             string localFile = Path.Combine(PathUtil.ReadWritePath, fileInfos[i].fileName);
+            //TODO：如果要实现真正的热更新，应该是通过文件的md5值来进行校验
             if (!FileUtil.IsExists(localFile))
             {
                 fileInfos[i].url = Path.Combine(AppConst.ResourcesUrl, fileInfos[i].fileName);
