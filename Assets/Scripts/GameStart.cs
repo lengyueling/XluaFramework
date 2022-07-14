@@ -10,16 +10,40 @@ public class GameStart : MonoBehaviour
     public bool OpenLog;
     void Start()
     {
-        Manager.Event.Subscribe(10000, onLuaInit);
-        AppConst.GameMode = GameMode;
-        AppConst.OpenLog = OpenLog;
+        Manager.Event.Subscribe((int)GameEvent.StartLua, StartLua);
+        Manager.Event.Subscribe((int)GameEvent.GameInit, GameInit);
+        AppConst.GameMode = this.GameMode;
+        AppConst.OpenLog = this.OpenLog;
         DontDestroyOnLoad(this);
 
-        Manager.Resource.ParseVersonFile();
+        if (AppConst.GameMode == GameMode.UpdateMode)
+        {
+            this.gameObject.AddComponent<HotUpdate>();
+        } 
+        else
+        {
+            Manager.Event.Fire((int)GameEvent.GameInit);
+        }
+    }
+
+    /// <summary>
+    /// GameInit的回调函数
+    /// </summary>
+    /// <param name="args"></param>
+    private void GameInit(object args)
+    {
+        if (AppConst.GameMode != GameMode.EditorMode)
+        {
+            Manager.Resource.ParseVersionFile();
+        }
         Manager.Lua.Init();
     }
 
-    void onLuaInit(object args)
+    /// <summary>
+    /// StartLua的回调函数
+    /// </summary>
+    /// <param name="args"></param>
+    private void StartLua(object args)
     {
         Manager.Lua.StartLua("main");
         LuaFunction func = Manager.Lua.LuaEnv.Global.Get<LuaFunction>("Main");
@@ -29,11 +53,11 @@ public class GameStart : MonoBehaviour
         Manager.Pool.CreateGameObjectPool("Monster", 120);
         Manager.Pool.CreateGameObjectPool("Effect", 120);
         Manager.Pool.CreateAssetPool("AssetBundle", 10);
-
     }
 
     private void OnApplicationQuit()
     {
-        Manager.Event.UnSubscribe(10000, onLuaInit);
+        Manager.Event.UnSubscribe((int)GameEvent.StartLua, StartLua);
+        Manager.Event.UnSubscribe((int)GameEvent.GameInit, GameInit);
     }
 }

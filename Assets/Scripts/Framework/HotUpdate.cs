@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +29,10 @@ public class HotUpdate : MonoBehaviour
         public string fileName;
         public DownloadHandler fileData;
     }
+    /// <summary>
+    /// 下载文件的数量
+    /// </summary>
+    int m_DownloadCount;
 
     /// <summary>
     /// 下载单个文件
@@ -46,6 +50,8 @@ public class HotUpdate : MonoBehaviour
             yield break;
             //TODO retry
         }
+        yield return new WaitForSeconds(0.2f);
+
         info.fileData = webRequest.downloadHandler;
         //执行回调函数
         Complete?.Invoke(info);
@@ -93,22 +99,23 @@ public class HotUpdate : MonoBehaviour
         return downFileInfos;
     }
 
+
+    GameObject loadingObj;
+    LoadingUI loadingUI;
     private void Start()
     {
-        if (AppConst.GameMode == GameMode.EditorMode)
+        GameObject go = Resources.Load<GameObject>("LoadingUI");
+        loadingObj = Instantiate(go);
+        loadingObj.transform.SetParent(this.transform);
+        loadingUI = loadingObj.GetComponent<LoadingUI>();
+
+        if (IsFirstInstall())
         {
-            EnterGame();
+            ReleaseResources();
         }
         else
         {
-            if (IsFirstInstall())
-            {
-                ReleaseResources();
-            }
-            else
-            {
-                CheckUpdate();
-            }
+            CheckUpdate();
         }
     }
 
@@ -133,6 +140,7 @@ public class HotUpdate : MonoBehaviour
     /// </summary>
     private void ReleaseResources()
     {
+        m_DownloadCount = 0;
         string url = Path.Combine(PathUtil.ReadPath, AppConst.FileListName);
         DownFileInfo info = new DownFileInfo();
         info.url = url;
@@ -150,6 +158,7 @@ public class HotUpdate : MonoBehaviour
         m_ReadPathFileListData = file.fileData.data;
         List<DownFileInfo> fileInfos = GetFileList(file.fileData.text, PathUtil.ReadPath);
         StartCoroutine(DownLoadFile(fileInfos, OnReleaseFileComplete, OnReleaseAllFileComplete));
+        loadingUI.InitProgress(fileInfos.Count,"正在释放资源，不消耗流量...");
     }
 
     /// <summary>
@@ -173,6 +182,9 @@ public class HotUpdate : MonoBehaviour
         Debug.Log("OnReleaseFileComplete:" + fileInfo.url);
         string writeFile = Path.Combine(PathUtil.ReadWritePath, fileInfo.fileName);
         FileUtil.WriteFile(writeFile, fileInfo.fileData.data);
+        m_DownloadCount++;
+        loadingUI.UpdateProgress(m_DownloadCount);
+
     }
 
     /// <summary>
@@ -194,6 +206,7 @@ public class HotUpdate : MonoBehaviour
     /// <param name="file"></param>
     private void OnDownLoadServerFileListComplete(DownFileInfo file)
     {
+        m_DownloadCount = 0;
         m_ServerFileListData = file.fileData.data;
         List<DownFileInfo> fileInfos = GetFileList(file.fileData.text, AppConst.ResourcesUrl);
         List<DownFileInfo> downListFiles = new List<DownFileInfo>();
@@ -211,6 +224,7 @@ public class HotUpdate : MonoBehaviour
         if (downListFiles.Count > 0)
         {
             StartCoroutine(DownLoadFile(fileInfos, OnUpdateFileComplete, OnUpdateAllFileComplete));
+            loadingUI.InitProgress(downListFiles.Count, "正在更新...");
         }
         else
         {
@@ -227,6 +241,7 @@ public class HotUpdate : MonoBehaviour
         //更新完成后，需要把最新的filelist文件下载到本地ReadWritePath
         FileUtil.WriteFile(Path.Combine(PathUtil.ReadWritePath, AppConst.FileListName), m_ServerFileListData);
         EnterGame();
+        loadingUI.InitProgress(0, "正在载入...");
     }
 
     /// <summary>
@@ -239,6 +254,8 @@ public class HotUpdate : MonoBehaviour
         Debug.Log("OnUpdateFileComplete:" + file.url);
         string writeFile = Path.Combine(PathUtil.ReadWritePath, file.fileName);
         FileUtil.WriteFile(writeFile, file.fileData.data);
+        m_DownloadCount++;
+        loadingUI.UpdateProgress(m_DownloadCount);
     }
 
     /// <summary>
@@ -248,20 +265,7 @@ public class HotUpdate : MonoBehaviour
     /// </summary>
     private void EnterGame()
     {
-        //测试
-        Manager.Resource.ParseVersonFile();
-        Manager.Resource.LoadUI("TestUI", OnComplete);
-    }
-
-    /// <summary>
-    /// 回调函数
-    /// </summary>
-    /// <param name="obj"></param>
-    private void OnComplete(Object obj)
-    {
-        GameObject go = Instantiate(obj) as GameObject;
-        go.transform.SetParent(this.transform);
-        go.SetActive(true);
-        go.transform.localPosition = Vector3.zero;
-    }
+		Manager.Event.Fire((int)GameEvent.GameInit);
+		Destroy(loadingObj);
+	}
 }

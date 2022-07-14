@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 419816325
+CRC: 2996047558
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 25915d63d821b8dc88d38cf44081066c
+    Hash: 779eb0da6a4443fbc055c12f53d9b504
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c6016f73cbd685cbaef8ff1685e1a360
+    Hash: b3f8d262fa9235fce84824a9f52a017b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,13 +20,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -35,13 +33,9 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
-- Class: 223
-  Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 Assets:
 - Assets/BuildResources/UI/Prefabs/TestUI.prefab
 Dependencies:
-- E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/bg01.png.ab
-- E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/game_title.png.ab
-- E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/loading.jpg.ab
+- E:/unity/XLuaFramework/Assets/StreamingAssets/ui/res/login/loading_bar.png.ab

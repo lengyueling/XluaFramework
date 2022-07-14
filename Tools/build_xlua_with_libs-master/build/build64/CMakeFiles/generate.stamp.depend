@@ -1,0 +1,24 @@
+# CMake generation dependency list for this directory.
+C:/Users/10309/Desktop/build_xlua_with_libs-master/build/CMakeLists.txt
+C:/Users/10309/Desktop/build_xlua_with_libs-master/build/build64/CMakeFiles/3.20.3/CMakeCCompiler.cmake
+C:/Users/10309/Desktop/build_xlua_with_libs-master/build/build64/CMakeFiles/3.20.3/CMakeCXXCompiler.cmake
+C:/Users/10309/Desktop/build_xlua_with_libs-master/build/build64/CMakeFiles/3.20.3/CMakeRCCompiler.cmake
+C:/Users/10309/Desktop/build_xlua_with_libs-master/build/build64/CMakeFiles/3.20.3/CMakeSystem.cmake
+C:/Users/10309/Desktop/build_xlua_with_libs-master/build/lua-5.3.5/src/luaconf.h.in
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeCInformation.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeCXXInformation.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeGenericSystem.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeInitializeConfigs.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeRCInformation.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeSystemSpecificInformation.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/CMakeSystemSpecificInitialize.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Compiler/MSVC-C.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Compiler/MSVC-CXX.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC-C.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC-CXX.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows.cmake
+D:/Program Files/CMake/share/cmake-3.20/Modules/Platform/WindowsPaths.cmake

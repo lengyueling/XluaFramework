@@ -23,6 +23,12 @@ public enum GameMode
     UpdateMode
 }
 
+public enum GameEvent
+{
+    GameInit = 100000,
+    StartLua,
+}
+
 public class AppConst
 {
     public const string BundleExtension = ".ab";
@@ -35,5 +41,5 @@ public class AppConst
     /// <summary>
     /// 资源更新服务器目录
     /// </summary>
-    public const string ResourcesUrl = "http://127.0.0.1:9860/AssetBundles/";
+    public const string ResourcesUrl = "http://127.0.0.1:6246/AssetBundles/";
 }

@@ -59,7 +59,7 @@ public class ResourceManager : MonoBehaviour
     /// <summary>
     /// 解析filelist文件
     /// </summary>
-    public void ParseVersonFile()
+    public void ParseVersionFile()
     {
         //获取版本文件路径
         string url = Path.Combine(PathUtil.BundleResourcePath, AppConst.FileListName);

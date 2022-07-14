@@ -100,7 +100,7 @@ public class LuaManager : MonoBehaviour
                  if (m_LuaScripts.Count >= LuaNames.Count)
                  {
                      //执行init事件
-                     Manager.Event.Fire(10000);
+                     Manager.Event.Fire((int)GameEvent.StartLua);
                      //重置需要加载文件的列表
                      LuaNames.Clear();
                      LuaNames = null;
@@ -136,7 +136,7 @@ public class LuaManager : MonoBehaviour
             AddLuaScript(PathUtil.GetUnityPath(fileName), file);
         }
         //执行init事件
-        Manager.Event.Fire(10000);
+        Manager.Event.Fire((int)GameEvent.StartLua);
     }
 #endif
 

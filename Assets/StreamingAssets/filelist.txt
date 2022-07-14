@@ -1,7 +1,12 @@
 Assets/BuildResources/Audio/Music/dayu.mp3|audio/music/dayu.mp3.ab
 Assets/BuildResources/Audio/Sound/ui_touch.wav|audio/sound/ui_touch.wav.ab
+Assets/BuildResources/LuaScripts/class.bytes|luascripts/class.bytes.ab
+Assets/BuildResources/LuaScripts/log.bytes|luascripts/log.bytes.ab
 Assets/BuildResources/LuaScripts/main.bytes|luascripts/main.bytes.ab
 Assets/BuildResources/LuaScripts/entity/PlayerEntity.bytes|luascripts/entity/playerentity.bytes.ab
+Assets/BuildResources/LuaScripts/message/base_msg.bytes|luascripts/message/base_msg.bytes.ab
+Assets/BuildResources/LuaScripts/message/msg_mgr.bytes|luascripts/message/msg_mgr.bytes.ab
+Assets/BuildResources/LuaScripts/message/msg_test.bytes|luascripts/message/msg_test.bytes.ab
 Assets/BuildResources/LuaScripts/scene/Scene01.bytes|luascripts/scene/scene01.bytes.ab
 Assets/BuildResources/LuaScripts/scene/Scene02.bytes|luascripts/scene/scene02.bytes.ab
 Assets/BuildResources/LuaScripts/ui/TestUI.bytes|luascripts/ui/testui.bytes.ab
