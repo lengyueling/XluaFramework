@@ -28,15 +28,26 @@ Manager.Entity:SetEntityGroup(entity_group);
 
 --C# 外部固定执行的函数
 function Main()
-	print("hello main");
+	print("MainFun Start");
 	--打开UI，实例化对应实体
     --参数：要打开UI资源的名字，UI分组名，使用的Lua文件
 	--Manager.UI:OpenUI("TestUI1","Main","ui.TestUI")
 	--Manager.UI:OpenUI("TestUI2","UI","ui.TestUI")
 	--Manager.UI:OpenUI("TestUI3","Box","ui.TestUI")
 	
-	Manager.UI:OpenUI("TestUI","Main","ui.TestUI")
-	print("main end");
+	--Manager.UI:OpenUI("TestUI","Main","ui.TestUI")
+
+	--rapidjson测试
+	local rapidjson = require('rapidjson')
+	--将json解析为lua
+	local t = rapidjson.decode('{"a":123}')
+	print(t.a)
+	t.a = 456
+	--将lua解析成json
+	local s = rapidjson.encode(t)
+	print('json', s)
+
+	print("MainFun End");
 end
 
 -- Main()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using XLua;
+using XLua.LuaDLL;
 using Object = UnityEngine.Object;
 
 public class LuaManager : MonoBehaviour
@@ -23,14 +24,15 @@ public class LuaManager : MonoBehaviour
     /// 全局只有一个
     /// </summary>
     public LuaEnv LuaEnv;
-
+    
     /// <summary>
     /// 初始化
     /// </summary>
     public void Init()
     {
         LuaEnv = new LuaEnv();
-
+        //调用AddBuildin
+        LuaEnv.AddBuildin("rapidjson", Lua.LoadRapidJson);
         //lua虚拟机注册回调获取lua脚本
         LuaEnv.AddLoader(Loader);
 
