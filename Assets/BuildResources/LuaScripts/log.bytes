@@ -1,0 +1,68 @@
+local Log = {}
+
+local function read_table(tab,tab_count)
+	local function get_symbol(count)
+		local symol = "";
+		for i = 1,count do
+			symol = symol .. "    ";
+		end
+		return symol;
+	end
+	local symbol = get_symbol(tab_count);
+	local str = "";
+	for k,v in pairs(tab) do
+		if type(v) == "table" then
+			str = str .. symbol .. k .. ":\n" .. symbol .."{\n"..read_table(v,tab_count + 1)..symbol.."}\n";
+		elseif type(v) == "userdata" then
+			str = str ..symbol .. k ..  " = userdata,\n";
+		elseif type(v) == "function" then
+			str = str ..symbol .. k ..  " = function,\n";
+		else
+			str = str ..symbol .. k ..  " = " .. tostring(v)..",\n";
+		end
+	end
+	return str;
+end
+
+
+local function get_log_string(...)
+	local str = "";
+	local pram = {...};
+	for k,v in pairs(pram) do
+		if type(v) == "table" then
+			str = str .. "{\n".. read_table(v,1) .."}\n";
+		elseif type(v) == "function" then
+			str = str .. v ..  "function,\n";
+		elseif type(v) == "userdata" then
+			str = str .. "userdata,\n";
+		else
+			str = str .. tostring(v) .. "  ";
+		end
+	end
+	return str;
+end
+
+
+function Log.Info(...)
+	if not AppConst.OpenLog then
+		return
+	end
+	CS.Log.Info(get_log_string(...));
+end
+
+function Log.Warning(...)
+	if not AppConst.OpenLog then
+		return
+	end
+	CS.Log.Warning(get_log_string(...));
+end
+
+function Log.Error(...)
+	if not AppConst.OpenLog then
+		return
+	end
+	local str = get_log_string(...);
+	CS.Log.Error(str .. debug.traceback());
+end
+
+return Log;

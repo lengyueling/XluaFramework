@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +31,7 @@ public class AppConst
     /// 当前游戏模式，默认为编辑器模式
     /// </summary>
     public static GameMode GameMode = GameMode.EditorMode;
+    public static bool OpenLog = false;
     /// <summary>
     /// 资源更新服务器目录
     /// </summary>

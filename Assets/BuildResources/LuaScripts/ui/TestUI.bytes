@@ -50,7 +50,8 @@ function OnOpen()
 
 	btn_pooltest:OnClickSet(
 		function()
-			Manager.UI:OpenUI("Login/LoginUI","UI","ui.TestUI");
+			-- Manager.UI:OpenUI("Login/LoginUI","UI","ui.TestUI");
+			msg_mgr.get_msg("msg_test"):req_first_test(99999,"admin","*****",{1,3,5});
 		end)
 
 	btn_close:OnClickSet(

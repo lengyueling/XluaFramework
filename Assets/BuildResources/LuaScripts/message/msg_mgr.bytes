@@ -1,0 +1,55 @@
+local msg_mgr = {}
+
+local msg_model_list = {}
+local msg_responses = {};
+
+
+--手动添加每个模块名字
+local msg_name_list = 
+{
+	"msg_test",
+}
+
+--初始化模块
+function msg_mgr.init()
+	for k,v in pairs(msg_name_list) do
+		msg_model_list[v] = require("message."..v).new();
+	end
+end
+
+--获取消息
+function msg_mgr.get_msg(key)
+	if not msg_model_list[key] then
+		Log.Error("脚本不存在:"..key);
+		return
+	end
+	return msg_model_list[key];
+end
+
+--注册消息
+function msg_mgr.register(msg_id,func)
+	if msg_responses[msg_id] then
+		Log.Error("消息已注册:"..msg_id);
+		return
+	end
+	msg_responses[msg_id] = func;
+end
+
+--接受消息
+function ReceiveMessage(msg_id,message)
+	Log.Info("<color=#A0522D>receive:<<<<<<<<<<<<<<<<<<<<<<<<<<:id = "..msg_id .. " : "..message.."</color>");
+	if type(msg_responses[msg_id]) == "function" then
+		msg_responses[msg_id](message);
+	else
+		Log.Error("此消息没有res：",msg_id);
+	end
+end
+
+--发送消息
+function msg_mgr.send_msg(msg_id,send_data)
+	local str = Json.encode(send_data);
+	Log.Info("<color=#9400D3>send:>>>>>>>>>>>>>>>>>>>>>>>>>:id = "..msg_id.." : "..str.."</color>");
+	Manager.Net:SendMessage(msg_id,str);
+end
+
+return msg_mgr;

@@ -7,10 +7,12 @@ using XLua;
 public class GameStart : MonoBehaviour
 {
     public GameMode GameMode;
+    public bool OpenLog;
     void Start()
     {
         Manager.Event.Subscribe(10000, onLuaInit);
         AppConst.GameMode = GameMode;
+        AppConst.OpenLog = OpenLog;
         DontDestroyOnLoad(this);
 
         Manager.Resource.ParseVersonFile();
